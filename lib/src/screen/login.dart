@@ -1,58 +1,55 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-void main() {
-  runApp(const LoginPage());
-}
+// void main() {
+//   runApp(const LogInPage());
+// }
 
-class LoginPage extends StatelessWidget {
-  static const routeName = 'login_page';
-  static const fullPath = '/$routeName';
+// class LoginPage extends StatelessWidget {
+//   const LoginPage({super.key});
 
-  const LoginPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Log In Page',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        fontFamily: GoogleFonts.notoSansThai().fontFamily,
-        textTheme: const TextTheme(
-          titleMedium: TextStyle(
-            fontSize: 20.0,
-            fontWeight: FontWeight.bold,
-          ),
-          bodyMedium: TextStyle(
-            fontSize: 16.0,
-            fontWeight: FontWeight.normal,
-          ),
-          bodySmall: TextStyle(
-            fontSize: 12.0,
-            fontWeight: FontWeight.normal,
-          ),
-        ),
-        elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ElevatedButton.styleFrom(
-            foregroundColor: Colors.white,
-            backgroundColor: const Color(0xff1BC28E),
-            shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(12.0),
-              ),
-            ),
-            minimumSize: const Size(140, 34),
-            textStyle: TextStyle(
-              fontFamily: GoogleFonts.notoSansThai().fontFamily,
-              fontSize: 18.0,
-            ),
-          ),
-        ),
-      ),
-      home: const LogInPage(),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return const MaterialApp(
+//       // title: 'Log In Page',
+//       // debugShowCheckedModeBanner: false,
+//       // theme: ThemeData(
+//       //   fontFamily: GoogleFonts.notoSansThai().fontFamily,
+//       //   textTheme: const TextTheme(
+//       //     titleMedium: TextStyle(
+//       //       fontSize: 20.0,
+//       //       fontWeight: FontWeight.bold,
+//       //     ),
+//       //     bodyMedium: TextStyle(
+//       //       fontSize: 16.0,
+//       //       fontWeight: FontWeight.normal,
+//       //     ),
+//       //     bodySmall: TextStyle(
+//       //       fontSize: 12.0,
+//       //       fontWeight: FontWeight.normal,
+//       //     ),
+//       //   ),
+//       //   elevatedButtonTheme: ElevatedButtonThemeData(
+//       //     style: ElevatedButton.styleFrom(
+//       //       foregroundColor: Colors.white,
+//       //       backgroundColor: const Color(0xff1BC28E),
+//       //       shape: const RoundedRectangleBorder(
+//       //         borderRadius: BorderRadius.all(
+//       //           Radius.circular(10.0),
+//       //         ),
+//       //       ),
+//       //       minimumSize: const Size(140, 34),
+//       //       textStyle: TextStyle(
+//       //         fontFamily: GoogleFonts.notoSansThai().fontFamily,
+//       //         fontSize: 18.0,
+//       //       ),
+//       //     ),
+//       //   ),
+//       // ),
+//       home: LogInPage(),
+//     );
+//   }
+// }
 
 class LogInPage extends StatefulWidget {
   const LogInPage({super.key});
@@ -62,10 +59,10 @@ class LogInPage extends StatefulWidget {
 }
 
 class _LogInPageState extends State<LogInPage> {
+  bool passToggle = false;
   final _loginKey = GlobalKey<FormState>();
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
-  bool passToggle = true;
 
   @override
   Widget build(BuildContext context) {
@@ -178,6 +175,7 @@ class _LogInPageState extends State<LogInPage> {
                                                 // },
                                               ),
                                               TextFormField(
+                                                obscureText: true,
                                                 keyboardType:
                                                     TextInputType.text,
                                                 style: Theme.of(context)
@@ -225,13 +223,8 @@ class _LogInPageState extends State<LogInPage> {
                                                     ),
                                                     //ไปหน้า register
                                                     onTap: () =>
-                                                        ScaffoldMessenger.of(
-                                                                context)
-                                                            .showSnackBar(
-                                                      const SnackBar(
-                                                        content: Text('สมัคร'),
-                                                      ),
-                                                    ),
+                                                        Navigator.pushNamed(
+                                                            context, '/signin'),
                                                   ),
                                                   InkWell(
                                                     child: Text(
@@ -263,15 +256,21 @@ class _LogInPageState extends State<LogInPage> {
                                                 onPressed: () {
                                                   if (_loginKey.currentState!
                                                       .validate()) {
-                                                    ScaffoldMessenger.of(
-                                                            context)
-                                                        .showSnackBar(
-                                                      const SnackBar(
-                                                        content:
-                                                            Text('ล็อกอิน'),
-                                                      ),
-                                                    );
+                                                    // print('Success');
+                                                    usernameController.clear();
+                                                    passwordController.clear();
                                                   }
+
+                                                  // {
+                                                  //   ScaffoldMessenger.of(
+                                                  //           context)
+                                                  //       .showSnackBar(
+                                                  //     const SnackBar(
+                                                  //       content:
+                                                  //           Text('ล็อกอิน'),
+                                                  //     ),
+                                                  //   );
+                                                  // }
                                                 },
                                                 child:
                                                     const Text('เข้าสู่ระบบ'),
@@ -287,7 +286,7 @@ class _LogInPageState extends State<LogInPage> {
                                   ),
                                 ),
                               ],
-                            )
+                            ),
                           ],
                         ),
                       ),
